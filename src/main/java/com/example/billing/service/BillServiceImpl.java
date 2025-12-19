@@ -29,8 +29,12 @@ public class BillServiceImpl implements BillService {
 
     private final BillRepository billRepository;
 
-    public BillServiceImpl(BillRepository billRepository) {
-        this.billRepository = billRepository;
+    private final CurrencyConversionService currencyService;
+
+    public BillServiceImpl(BillRepository repo,
+                           CurrencyConversionService currencyService) {
+        this.billRepository = repo;
+        this.currencyService = currencyService;
     }
 
     @Override
@@ -75,8 +79,14 @@ public class BillServiceImpl implements BillService {
                3. PARSING & CALCULATION
                ========================= */
 
-            BigDecimal totalDue =
+            BigDecimal originalAmount =
                     new BigDecimal(input.getTotalAmount().replace("$", ""));
+
+            BigDecimal totalDue =
+                    currencyService.convertToINR(
+                            originalAmount,
+                            input.getCountryOfOrigin()
+                    );
 
             BigDecimal usageKwh =
                     new BigDecimal(input.getUsageKwh());

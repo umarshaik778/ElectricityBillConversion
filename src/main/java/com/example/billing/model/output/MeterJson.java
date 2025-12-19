@@ -1,25 +1,17 @@
 package com.example.billing.model.output;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MeterJson {
 
     private String meterNumber;
     private LocalDate readDate;
 
-    public MeterJson(String meterNumber, LocalDate readDate) {
-        this.meterNumber = meterNumber;
-        this.readDate = readDate;
-    }
-
-    public String getMeterNumber() { return meterNumber; }
-    public LocalDate getReadDate() { return readDate; }
-
-    @Override
-    public String toString() {
-        return "MeterJson{" +
-                "meterNumber='" + meterNumber + '\'' +
-                ", readDate=" + readDate +
-                '}';
-    }
 }

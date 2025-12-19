@@ -4,7 +4,13 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import com.example.billing.model.input.MetersXml;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @JacksonXmlRootElement(localName = "bill")
 public class BillXmlInput {
 
@@ -20,23 +26,10 @@ public class BillXmlInput {
     @JacksonXmlProperty(localName = "usageKwh")
     private String usageKwh;
 
+    @JacksonXmlProperty(localName = "countryOfOrigin")
+    private String countryOfOrigin;
+
     @JacksonXmlProperty(localName = "meters")
     private MetersXml meters;
 
-    public String getAccountNo() { return accountNo; }
-    public String getBillDate() { return billDate; }
-    public String getTotalAmount() { return totalAmount; }
-    public String getUsageKwh() { return usageKwh; }
-    public MetersXml getMeters() { return meters; }
-
-    @Override
-    public String toString() {
-        return "BillXmlInput{" +
-                "accountNo='" + accountNo + '\'' +
-                ", billDate='" + billDate + '\'' +
-                ", totalAmount='" + totalAmount + '\'' +
-                ", usageKwh='" + usageKwh + '\'' +
-                ", meters=" + meters +
-                '}';
-    }
 }
