@@ -9,6 +9,25 @@
               value="%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n"/>
 
     <!-- ========================= -->
+    <!-- INPUT FILE APPENDER       -->
+    <!-- ========================= -->
+
+    <appender name="REQUEST_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/request.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/request-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <!-- ========================= -->
     <!-- CONSOLE APPENDER         -->
     <!-- ========================= -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -68,6 +87,12 @@
     <!-- ========================= -->
     <!-- CUSTOM LOGGERS           -->
     <!-- ========================= -->
+
+    <!-- INPUT LOGGER -->
+    <logger name="REQUEST_LOG" level="INFO" additivity="false">
+        <appender-ref ref="REQUEST_FILE"/>
+    </logger>
+
 
     <!-- SUCCESS LOGGER -->
     <logger name="SUCCESS_LOG" level="INFO" additivity="false">
